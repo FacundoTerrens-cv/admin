@@ -1,5 +1,3 @@
-
-
 <?php
    session_start();
    if(!isset($_SESSION['user'])){
@@ -7,7 +5,7 @@
    }
    require_once('conection.php');
    $empleado = $_SESSION['user'];
-   $sql = "SELECT id, title, start, end, color FROM events WHERE empleado = '$empleado'";
+   $sql = "SELECT id, servicio, estado  FROM servicios WHERE empleado = '$empleado'";
    $events = mysqli_query($conn, $sql);
    ?>
 <!DOCTYPE html>
@@ -67,7 +65,7 @@
                   <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                   Pedidos
                </a>
-               <a class="nav-link" href="dias_empleado.php">
+               <a class="nav-link" href="horarios.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dias
                             </a>
@@ -91,7 +89,7 @@
             <div class="container-fluid px-4">
                <h1 class="mt-4">Turnos</h1>
                <?php
-                  $sql = "SELECT * FROM horarios_turnos WHERE empleado = '$empleado';";
+                  $sql = "SELECT id, servicio, estado, data_servicio  FROM servicios WHERE empleado = '$empleado'";
                   $consulta = mysqli_query($conn, $sql);
                   ?>
                <div class="card mb-4">
@@ -103,16 +101,16 @@
                      <table id="datatablesSimple">
                         <thead>
                            <tr>
-                              <th>Hora Inicio</th>
-                              <th>Hora Final</th>
+                              <th>Servicio</th>
+                              <th>Estado</th>
                               <th>--</th>
                               <th>--</th>
                            </tr>
                         </thead>
                         <tfoot>
                            <tr>
-                              <th>Hora Inicio</th>
-                              <th>Hora Final</th>
+                              <th>Servicio</th>
+                              <th>Estado</th>
                               <th>--</th>
                               <th>--</th>
                            </tr>
@@ -121,18 +119,17 @@
                            <?php 
                               while($emp = mysqli_fetch_array($consulta)){ ?>
                            <tr>
-                              <td><?php echo $emp['hora_inicio']?></td>
-                              <td><?php echo $emp['hora_final']?></td>
-
+                              <td><?php echo $emp['data_servicio']?></td>
+                              <td><?php echo $emp['estado']?></td>
                               <td>
                                  <form action="" method="post">
-                                    <a class="btn btn-danger" style="background-color: red" type="submit" name="btn" value="eliminar" href="delete_horarios_back.php?id=<?php echo $emp['id']?>">Fjerne</a>
+                                    <a class="btn btn-success" style="background-color: red" type="submit" name="btn" value="eliminar" href="manage_servicios.php?id=<?php echo $emp['id']?>&valor_servicio=NULL&empleado=<?php echo $empleado?>&estado=Desactivado">Desactivar</a>
                               </td>
                               </form>
                               </td>
                               <td>
                                  <form action="" method="post">
-                                    <a class="btn btn-success" style="background-color: green" type="submit" name="btn" value="eliminar" href="edit_horarios.php?id=<?php echo $emp['id']?>">Redigere</a>
+                                 <a class="btn btn-danger" style="background-color: green" type="submit" name="btn" value="eliminar" href="manage_servicios.php?id=<?php echo $emp['id']?>&valor_servicio=<?php echo $emp['data_servicio']?>&empleado=<?php echo $empleado?>&estado=Activado">Activar</a>
                               </td>
                               </form>
                            </tr>
@@ -141,41 +138,6 @@
                      </table>
                   </div>
                </div>
-               <div class="card mb-4">
-                  <div class="container">
-                        <div class="modal-dialog" role="document">
-                           <div class="modal-content">
-                              <form class="form-horizontal" method="POST" action="add_horarios_back.php">
-                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Agregar Horario</h4>
-                                 </div>
-                                 <div class="modal-body">
-                                    <div class="form-group">
-                                       <label for="title" class="col-sm-2 control-label">Hora Inicio</label>
-                                       <div class="col-sm-10">
-                                          <input type="text" name="hora_inicio" class="form-control" id="title" placeholder="08:00">
-                                       </div>
-                                    </div>
-                                    <div class="form-group">
-                                       <label for="title" class="col-sm-2 control-label">Hora Final</label>
-                                       <div class="col-sm-10">
-                                          <input type="text" name="hora_final" class="form-control" id="title" placeholder="09:00">
-                                       </div>
-                                    </div>
-                                    <div class="form-group" style="display: none;">
-                                       <div class="col-sm-10">
-                                          <input type="text" name="empleado" class="form-control" id="title" placeholder="Titulo" value="<?php echo $empleado; ?>">
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                 </div>
-                              </form>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
                </div>
          </main>
          <footer class="py-4 bg-light mt-auto">

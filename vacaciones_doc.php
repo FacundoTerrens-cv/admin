@@ -67,6 +67,18 @@ $events = mysqli_query($conn, $sql);
                   <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                   Pedidos
                </a>
+               <a class="nav-link" href="dias_empleado.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dias
+                            </a>
+               <a class="nav-link" href="horarios.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Horarios 
+                            </a>
+                            <a class="nav-link" href="servicios_empleado.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                               Servicios
+                            </a>
                <a class="nav-link" href="logout.php">
                   <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                   LogOut

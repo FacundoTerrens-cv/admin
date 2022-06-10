@@ -1,15 +1,11 @@
-
-
 <?php
    session_start();
    if(!isset($_SESSION['user'])){
      header('location: login.php');
    }
    require_once('conection.php');
-   $empleado = $_SESSION['user'];
-   $sql = "SELECT id, title, start, end, color FROM events WHERE empleado = '$empleado'";
-   $events = mysqli_query($conn, $sql);
-   ?>
+   $id = $_GET['id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -67,17 +63,9 @@
                   <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                   Pedidos
                </a>
-               <a class="nav-link" href="dias_empleado.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dias
-                            </a>
                <a class="nav-link" href="horarios.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Horarios 
-                            </a>
-                            <a class="nav-link" href="servicios_empleado.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                               Servicios
                             </a>
                <a class="nav-link" href="logout.php">
                   <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -89,82 +77,42 @@
       <div id="layoutSidenav_content">
          <main>
             <div class="container-fluid px-4">
-               <h1 class="mt-4">Turnos</h1>
-               <?php
-                  $sql = "SELECT * FROM horarios_turnos WHERE empleado = '$empleado';";
-                  $consulta = mysqli_query($conn, $sql);
-                  ?>
-               <div class="card mb-4">
-                  <div class="card-header">
-                     <i class="fas fa-table me-1"></i>
-                     Turnos Table
-                  </div>
-                  <div class="card-body">
-                     <table id="datatablesSimple">
-                        <thead>
-                           <tr>
-                              <th>Hora Inicio</th>
-                              <th>Hora Final</th>
-                              <th>--</th>
-                              <th>--</th>
-                           </tr>
-                        </thead>
-                        <tfoot>
-                           <tr>
-                              <th>Hora Inicio</th>
-                              <th>Hora Final</th>
-                              <th>--</th>
-                              <th>--</th>
-                           </tr>
-                        </tfoot>
-                        <tbody>
-                           <?php 
-                              while($emp = mysqli_fetch_array($consulta)){ ?>
-                           <tr>
-                              <td><?php echo $emp['hora_inicio']?></td>
-                              <td><?php echo $emp['hora_final']?></td>
 
-                              <td>
-                                 <form action="" method="post">
-                                    <a class="btn btn-danger" style="background-color: red" type="submit" name="btn" value="eliminar" href="delete_horarios_back.php?id=<?php echo $emp['id']?>">Fjerne</a>
-                              </td>
-                              </form>
-                              </td>
-                              <td>
-                                 <form action="" method="post">
-                                    <a class="btn btn-success" style="background-color: green" type="submit" name="btn" value="eliminar" href="edit_horarios.php?id=<?php echo $emp['id']?>">Redigere</a>
-                              </td>
-                              </form>
-                           </tr>
-                           <?php }?>
-                        </tbody>
-                     </table>
-                  </div>
-               </div>
+               <?php
+                  $sql = "SELECT * FROM horarios_turnos WHERE id = '$id';";
+                  $consulta = mysqli_query($conn, $sql);
+                  $horarios = mysqli_fetch_array($consulta);
+                  ?>
+
                <div class="card mb-4">
                   <div class="container">
                         <div class="modal-dialog" role="document">
                            <div class="modal-content">
-                              <form class="form-horizontal" method="POST" action="add_horarios_back.php">
+                              <form class="form-horizontal" method="POST" action="edit_horarios_back.php">
                                  <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Agregar Horario</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Editar Horario</h4>
                                  </div>
                                  <div class="modal-body">
                                     <div class="form-group">
                                        <label for="title" class="col-sm-2 control-label">Hora Inicio</label>
                                        <div class="col-sm-10">
-                                          <input type="text" name="hora_inicio" class="form-control" id="title" placeholder="08:00">
+                                          <input type="text" name="hora_inicio" class="form-control" id="title" value="<?php echo $horarios['hora_inicio']?>">
                                        </div>
                                     </div>
                                     <div class="form-group">
                                        <label for="title" class="col-sm-2 control-label">Hora Final</label>
                                        <div class="col-sm-10">
-                                          <input type="text" name="hora_final" class="form-control" id="title" placeholder="09:00">
+                                          <input type="text" name="hora_final" class="form-control" id="title" value="<?php echo $horarios['hora_final']?>">
                                        </div>
                                     </div>
                                     <div class="form-group" style="display: none;">
                                        <div class="col-sm-10">
-                                          <input type="text" name="empleado" class="form-control" id="title" placeholder="Titulo" value="<?php echo $empleado; ?>">
+                                          <input type="text" name="empleado" class="form-control" id="title" placeholder="Titulo" value="<?php echo $horarios['empleado']?>">
+                                       </div>
+                                    </div>
+                                    <div class="form-group" style="display: none;">
+                                       <div class="col-sm-10">
+                                          <input type="text" name="id" class="form-control" id="title" placeholder="Titulo" value="<?php echo $horarios['id']?>">
                                        </div>
                                     </div>
                                  </div>

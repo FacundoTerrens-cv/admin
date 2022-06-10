@@ -11,70 +11,8 @@ include "header.php";
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
-                        <!--
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-                        <!--
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
-                        -->
                         <?php
-                        $sql = "SELECT * FROM categorias;";
+                        $sql = "SELECT * FROM contenido_paginas WHERE tipo_contenido = 'categoria';";
                         $consulta = mysqli_query($conn, $sql);
                         ?>
                         <div class="card mb-4">
@@ -86,28 +24,18 @@ include "header.php";
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Categoria</th>
                                             <th>Servicio</th>
-                                            <th>Duracion</th>
-                                            <th>Precio</th>
+                                            <th>Titulo</th>
                                             <th>Descripcion</th>
-                                            <th>Localidad</th>
-                                            <th>Capacidad</th>
                                             <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Categoria</th>
                                             <th>Servicio</th>
-                                            <th>Duracion</th>
-                                            <th>Precio</th>
+                                            <th>Titulo</th>
                                             <th>Descripcion</th>
-                                            <th>Localidad</th>
-                                            <th>Capacidad</th>
                                             <th>Editar</th>
                                             <th>Eliminar</th>
                                         </tr>
@@ -116,14 +44,9 @@ include "header.php";
                                     <?php 
                                     while($emp = mysqli_fetch_array($consulta)){ ?>
                                         <tr>
-                                            <td><?php echo $emp['nombre']?></td>
-                                            <td><?php echo $emp['categoria']?></td>
-                                            <td><?php echo $emp['servicio']?></td>
-                                            <td><?php echo $emp['duracion']?></td>
-                                            <td><?php echo $emp['precio']?></td>
+                                            <td><?php echo $emp['tipo_servicio']?></td>
+                                            <td><?php echo $emp['titulo']?></td>
                                             <td><?php echo $emp['descripcion']?></td>
-                                            <td><?php echo $emp['localizacion']?></td>
-                                            <td><?php echo $emp['capacidad']?></td>
                                             <td>
                                                 <form action="" method="post">
                                                 <a class="btn btn-danger" style="background-color: red" type="submit" name="btn" value="eliminar" href="delete_categorias.php?id=<?php echo $emp['id']?>">Fjerne</a>
@@ -142,7 +65,44 @@ include "header.php";
                             </div>
                         </div>
                     </div>
-                </main>
+                    <div class="card mb-4">
+                  <div class="container">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                              <form class="form-horizontal" method="POST" action="add_categoria_back.php">
+                                 <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Agregar Categoria</h4>
+                                 </div>
+                                 <div class="modal-body">
+                                    <div class="form-group">
+                                       <label for="title" class="col-sm-2 control-label">Categoria</label>
+                                       <div class="col-sm-10">
+                                          <input type="text" name="categoria"  class="form-control" placeholder="Categoria">
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="title" class="col-sm-2 control-label">Titulo</label>
+                                       <div class="col-sm-10">
+                                          <input type="text" name="titulo" class="form-control" placeholder="Titulo">
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="title" class="col-sm-2 control-label">Descripcion</label>
+                                       <div class="col-sm-10">
+                                          <input type="text" name="descripcion" class="form-control" placeholder="Descripcion">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                    </main>
+                    
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">

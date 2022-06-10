@@ -1,22 +1,19 @@
 <?php 
-session_start();
-include "conection.php";
-if(!isset($_SESSION['user'])){
-    header('location: login.php');
-}
+include "conection.php"
 ?>
 <?php
 include "header.php";
 ?>
             <div id="layoutSidenav_content">
-                <main>
+
+                    <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                         <?php
-                        $sql = "SELECT * FROM empleados;";
+                        $sql = "SELECT * FROM contenido_paginas WHERE tipo_contenido = 'seccion';";
                         $consulta = mysqli_query($conn, $sql);
                         ?>
                         <div class="card mb-4">
@@ -28,35 +25,41 @@ include "header.php";
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Rol</th>
-                                            <th>Eliminar</th>
+                                            <th>Tipo Servicio</th>
+                                            <th>Servicio</th>
+                                            <th>Titulo</th>
+                                            <th>Descripcion</th>
                                             <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Rol</th>
-                                            <th>Eiliminar</th>
+                                            <th>Tipo Servicio</th>
+                                            <th>Servicio</th>
+                                            <th>Titulo</th>
+                                            <th>Descripcion</th>
                                             <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
                                     while($emp = mysqli_fetch_array($consulta)){ ?>
                                         <tr>
-                                            <td><?php echo $emp['nombre']?></td>
-                                            <td><?php echo $emp['rol']?></td>
+                                            <td><?php echo $emp['tipo_servicio']?></td>
+                                            <td><?php echo $emp['servicio']?></td>
+                                            <td><?php echo $emp['titulo']?></td>
+                                            <td><?php echo $emp['descripcion']?></td>
                                             <td>
                                                 <form action="" method="post">
-                                                <a class="btn btn-danger" style="background-color: red" type="submit" name="btn" value="eliminar" href="delete_empleado.php?id=<?php echo $emp['id']?>">Fjerne</a>
+                                                <a class="btn btn-danger" style="background-color: red" type="submit" name="btn" value="eliminar" href="delete_categorias.php?id=<?php echo $emp['id']?>">Fjerne</a>
                                             </td>
                                             </form>
                                             </td>
                                             <td>
                                                 <form action="" method="post">
-                                                <a class="btn btn-success" style="background-color: green" type="submit" name="btn" value="eliminar" href="edit_empleados_front.php?id=<?php echo $emp['id']?>">Redigere</a>
+                                                <a class="btn btn-success" style="background-color: green" type="submit" name="btn" value="eliminar" href="edit_categorias_front.php?id=<?php echo $emp['id']?>">Redigere</a>
                                             </td>
                                             </form>
                                         </tr>
@@ -70,33 +73,39 @@ include "header.php";
                   <div class="container">
                         <div class="modal-dialog" role="document">
                            <div class="modal-content">
-                              <form class="form-horizontal" method="POST" action="add_empleado_back.php">
+                              <form class="form-horizontal" method="POST" action="add_servicio_back.php">
                                  <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Agregar Empleado</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Agregar Servicio</h4>
                                  </div>
                                  <div class="modal-body">
+                                 <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">Categoria</label>
+                                    <?php
+                                        $sql_se = "SELECT * FROM contenido_paginas WHERE tipo_contenido = 'categoria'";
+                                        $query_se = mysqli_query($conn, $sql_se);
+                                    ?>
+                                    <select name="categoria" class="form-control" id="categoria" required>
+                                        <?php while($datos_se = mysqli_fetch_array($query_se)){ ?>
+                                            <option value="<?php echo $datos_se['tipo_servicio']?>"><?php echo $datos_se['tipo_servicio']?></option>
+                                            <?php } ?>
+                                    </select>
+                                    </div>
                                     <div class="form-group">
-                                       <label for="title" class="col-sm-2 control-label">Nombre</label>
+                                       <label for="title" class="col-sm-2 control-label">Servicio</label>
                                        <div class="col-sm-10">
-                                          <input type="text" name="nombre"  class="form-control" placeholder="Nombre">
+                                          <input type="text" name="servicio" class="form-control" placeholder="Servicio">
                                        </div>
                                     </div>
                                     <div class="form-group">
-                                       <label for="title" class="col-sm-2 control-label">Apellido</label>
+                                       <label for="title" class="col-sm-2 control-label">Titulo</label>
                                        <div class="col-sm-10">
-                                          <input type="text" name="apellido" class="form-control" placeholder="Apellido">
+                                          <input type="text" name="titulo" class="form-control" placeholder="Titulo">
                                        </div>
                                     </div>
                                     <div class="form-group">
-                                       <label for="title" class="col-sm-2 control-label">Correo</label>
+                                       <label for="title" class="col-sm-2 control-label">Descripcion</label>
                                        <div class="col-sm-10">
-                                          <input type="text" name="correo" class="form-control" placeholder="example@gmail.com">
-                                       </div>
-                                    </div>
-                                    <div class="form-group">
-                                       <label for="title" class="col-sm-2 control-label">Contraseña</label>
-                                       <div class="col-sm-10">
-                                          <input type="text" name="pass" class="form-control" placeholder="Password">
+                                          <input type="text" name="descripcion" class="form-control" placeholder="Descripcion">
                                        </div>
                                     </div>
                                  </div>
