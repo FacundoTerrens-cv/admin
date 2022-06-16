@@ -19,5 +19,4 @@ $imagen = $_FILES['imagen']['name'];
             }
         }
     }
-
 ?>

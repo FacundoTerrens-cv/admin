@@ -28,7 +28,6 @@ include "header.php";
                                             <th>Codigo</th>
                                             <th>Color</th>
                                             <th>--</th>
-
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -37,7 +36,6 @@ include "header.php";
                                             <th>Codigo</th>
                                             <th>Color</th>
                                             <th>--</th>
-
                                         </tr>
                                     </tfoot>
                                     <tbody>
