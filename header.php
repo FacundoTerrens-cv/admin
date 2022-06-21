@@ -75,14 +75,14 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Servicios
                             </a>
-                        <a class="nav-link" href="admin_servicios.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Asignar Servicios
-                        </a>
-                        <a class="nav-link" href="colors.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Colores
-                        </a>
+                            <a class="nav-link" href="admin_servicios.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Asignar Servicios
+                            </a>
+                            <a class="nav-link" href="colors.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Colores
+                            </a>
                             <a class="nav-link" href="logout.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 LogOut

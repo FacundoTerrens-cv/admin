@@ -73,7 +73,7 @@ include "header.php";
                   <div class="container">
                         <div class="modal-dialog" role="document">
                            <div class="modal-content">
-                              <form class="form-horizontal" method="POST" action="add_servicio_back.php">
+                              <form class="form-horizontal" method="POST" enctype="multipart/form-data"  action="add_servicio_back.php">
                                  <div class="modal-header">
                                     <h4 class="modal-title" id="myModalLabel">Agregar Servicio</h4>
                                  </div>
@@ -106,6 +106,24 @@ include "header.php";
                                        <label for="title" class="col-sm-2 control-label">Descripcion</label>
                                        <div class="col-sm-10">
                                           <input type="text" name="descripcion" class="form-control" placeholder="Descripcion">
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="title" class="col-sm-2 control-label">Duration</label>
+                                       <div class="col-sm-10">
+                                          <input type="text" name="duration" class="form-control" placeholder="Duration">
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="title" class="col-sm-2 control-label">Price</label>
+                                       <div class="col-sm-10">
+                                          <input type="text" name="price" class="form-control" placeholder="Price">
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="title" class="col-sm-2 control-label">Image</label>
+                                       <div class="col-sm-10">
+                                          <input type="file" name="imagen" class="form-control">
                                        </div>
                                     </div>
                                  </div>

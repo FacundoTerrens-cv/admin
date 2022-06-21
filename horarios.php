@@ -105,6 +105,7 @@
                            <tr>
                               <th>Hora Inicio</th>
                               <th>Hora Final</th>
+                              <th>Servicio</th>
                               <th>--</th>
                               <th>--</th>
                            </tr>
@@ -113,6 +114,7 @@
                            <tr>
                               <th>Hora Inicio</th>
                               <th>Hora Final</th>
+                              <th>Servicio</th>
                               <th>--</th>
                               <th>--</th>
                            </tr>
@@ -123,7 +125,7 @@
                            <tr>
                               <td><?php echo $emp['hora_inicio']?></td>
                               <td><?php echo $emp['hora_final']?></td>
-
+                              <td><?php echo $emp['servicio']?></td>
                               <td>
                                  <form action="" method="post">
                                     <a class="btn btn-danger" style="background-color: red" type="submit" name="btn" value="eliminar" href="delete_horarios_back.php?id=<?php echo $emp['id']?>">Fjerne</a>
@@ -150,6 +152,18 @@
                                     <h4 class="modal-title" id="myModalLabel">Agregar Horario</h4>
                                  </div>
                                  <div class="modal-body">
+                                 <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">Categoria</label>
+                                    <?php
+                                        $sql_se = "SELECT * FROM servicios WHERE empleado = '$empleado'";
+                                        $query_se = mysqli_query($conn, $sql_se);
+                                    ?>
+                                    <select name="servicio" class="form-control" id="categoria" required>
+                                        <?php while($datos_se = mysqli_fetch_array($query_se)){ ?>
+                                            <option value="<?php echo $datos_se['servicio']?>"><?php echo $datos_se['servicio']?></option>
+                                            <?php } ?>
+                                    </select>
+                                    </div>
                                     <div class="form-group">
                                        <label for="title" class="col-sm-2 control-label">Hora Inicio</label>
                                        <div class="col-sm-10">

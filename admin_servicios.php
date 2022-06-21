@@ -52,13 +52,13 @@ include "header.php";
                                             <td><?php echo $emp['estado'] ?></td>
                                             <td>
                                                 <form action="" method="post">
-                                                    <a class="btn btn-success" style="background-color: red" type="submit" name="btn" value="eliminar" href="manage_servicios.php?id=<?php echo $emp['id'] ?>&valor_servicio=NULL&empleado=<?php echo $empleado ?>&estado=Desactivado">Desactivar</a>
+                                                    <a class="btn btn-success" style="background-color: red" type="submit" name="btn" value="eliminar" href="manage_servicios.php?id=<?php echo $emp['id'] ?>&valor_servicio=NULL&empleado=<?php echo $emp['empleado'] ?>&estado=Desactivado">Desactivar</a>
                                             </td>
                                             </form>
                                             </td>
                                             <td>
                                                 <form action="" method="post">
-                                                    <a class="btn btn-danger" style="background-color: green" type="submit" name="btn" value="eliminar" href="manage_servicios.php?id=<?php echo $emp['id'] ?>&valor_servicio=<?php echo $emp['data_servicio'] ?>&empleado=<?php echo $empleado ?>&estado=Activado">Activar</a>
+                                                    <a class="btn btn-danger" style="background-color: green" type="submit" name="btn" value="eliminar" href="manage_servicios.php?id=<?php echo $emp['id'] ?>&valor_servicio=<?php echo $emp['data_servicio'] ?>&empleado=<?php echo $emp['empleado'] ?>&estado=Activado">Activar</a>
                                             </td>
                                             </form>
                                         </tr>

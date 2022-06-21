@@ -41,22 +41,6 @@ $exe = mysqli_query($conn,$consulta);
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="horario" name="horario" type="text" placeholder="Enter your first name" value="<?php echo $emp['horario_trabajo'];?>"/>
-                                                        <label for="inputFirstName">Horario</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="servicio" name="servicio" type="text" placeholder="Enter your first name" value="<?php echo $emp['servicio'];?>"/>
-                                                        <label for="inputFirstName">Servicio</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-12">
-                                                    <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="rol" name="rol" type="text" placeholder="Enter your first name" value="<?php echo $emp['rol'];?>"/>
                                                         <label for="inputFirstName">Rol</label>
                                                     </div>
